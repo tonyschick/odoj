@@ -1,8 +1,19 @@
 import urllib2
 import csv
 import re
-
+import mechanize
+import time
 from BeautifulSoup import *
+
+start_time = time.clock()
+
+br = mechanize.Browser()
+
+br.set_handle_equiv(True)
+br.set_handle_redirect(True)
+br.set_handle_referer(True)
+
+
 
 # Creates the output file for our scrape
 handle = open('complaints.csv', 'a')
@@ -16,19 +27,23 @@ headers = ['Case Status', 'Date Open', 'Date Closed', 'Respondent', 'Address Lin
 # into whichthe agency writes its data
 outfile.writerow(headers)
 
-complaint_numbers = range(62149)
+#Total number of records, taken from a basic check using the agency's query tool
+complaint_numbers = range(64129)
+
+casetotal = len(complaint_numbers)
+
 
 list_id = [num for num in complaint_numbers]
 
 for num in list_id:
 	    
-	no = str(num) #convert from tuple
+	cnum = str(num) #convert from tuple
 
 	# The base address we'll be working from
-	address = ('https://justice.oregon.gov/complaints/ComplaintsDetails.aspx?FFWebID=' + no)
+	address = ('https://justice.oregon.gov/complaints/ComplaintsDetails.aspx?FFWebID=' + cnum)
 
 	# Open the HTML file and turn it into a BeautifulSoup object for parsing
-	html = urllib2.urlopen(address).read()
+	html = br.open(address)
 
 	soup = BeautifulSoup(html)
 	counter = 0
@@ -55,8 +70,16 @@ for num in list_id:
 			if len(output_row) > 0:
 				outfile.writerow(output_row)
 
-#	for line in open('complaints.csv'):
-#		print line, "lines scraped"			
-	
+#Time Keeping and Process Status
+	stage_time = time.clock()
+	rowcount = sum(1 for line in open(r'/Users/anthonyschick/complaints.csv'))
+	print (int(stage_time-start_time)/60),":",(int(stage_time-start_time)%60)," #",cnum,"/", casetotal
+		
+	# Pause for a second to be polite to the server 
+	time.sleep(1)
 
-print "DONE !"
+
+### AND WE'RE DONE ###
+stop_time = time.clock()
+print "YOUR SCRAPE IS COMPLETE ... "
+print "AND IT ONLY TOOK",(int(stop_time-start_time/60),"minutes and ", (int(stop_time-start_time)%60), "seconds")
