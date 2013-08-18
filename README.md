@@ -1,4 +1,4 @@
-oregon consumer complaints
+Oregon consumer complaints
 ====
 
 Python scraper for Oregon Department of Justice Consumer Complaints  
