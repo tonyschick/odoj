@@ -33,7 +33,7 @@ Python scraper for Oregon Department of Justice Consumer Complaints
 
 7. Tell the scraper you whether you want the rest of the records. Type yes and it will start. It will keep track of each record and when it was scraped.
 
-Do you wish to scrape the rest? (type 'yes' or 'no') yes
+		Do you wish to scrape the rest? (type 'yes' or 'no') yes
 
 		0 : 0  # 1 / 64129 scraped
 		0 : 0  # 2 / 64129 scraped
