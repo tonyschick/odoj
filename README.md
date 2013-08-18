@@ -12,8 +12,8 @@ Python scraper for Oregon Department of Justice Consumer Complaints
 2. Make sure Python and the libraries used here are installed on your computer  
 [http://www.python.org/download/](http://www.python.org/download/)
 
-		* Install [mechanize](http://wwwsearch.sourceforge.net/mechanize/)
-		* Install [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/)
+	* Install [mechanize](http://wwwsearch.sourceforge.net/mechanize/)
+	* Install [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/)
 
 3. Open your terminal/command line
 
