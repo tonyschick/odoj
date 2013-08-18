@@ -85,11 +85,10 @@ if please_continue == "yes" or please_continue == "YES" or please_continue == "Y
 	#Total number of records, taken from a basic check using the agency's query tool
 	complaint_numbers = range(startingpoint, endingpoint)
 
-	casetotal = len(complaint_numbers)
-
-
 	list_id = [num for num in complaint_numbers]
 
+
+### OPEN THE BROWSER ###
 	for num in list_id:
 		    
 		cnum = str(num) #convert from tuple
@@ -125,19 +124,21 @@ if please_continue == "yes" or please_continue == "YES" or please_continue == "Y
 				if len(output_row) > 0:
 					outfile.writerow(output_row)
 
+### PROGRESS TRACKER ###
+
 	#Time Keeping and Process Status
 		stage_time = time.clock()
 
 	# Normally we would subtract one to account for row headers, but have to add one anyway
 	# because we need to start the scrape at 1 after the row count
 		rowcount = sum(1 for line in open(r'complaints.csv'))
-		print (int(stage_time-start_time)/60),":",(int(stage_time-start_time)%60)," #",cnum,"/", casetotal, " scraped"
+		print (int(stage_time-start_time)/60),":",(int(stage_time-start_time)%60)," #",cnum,"/", endingpoint, " scraped"
 			
 		# Pause for a second to be polite to the server 
 		time.sleep(1)
 
 
-	### AND WE'RE DONE ###
+### AND WE'RE DONE ###
 	stop_time = time.clock()
 	print "YOUR SCRAPE IS COMPLETE ... "
 	print "AND IT ONLY TOOK",(int(stop_time-start_time/60),"minutes and ", (int(stop_time-start_time)%60), "seconds")
